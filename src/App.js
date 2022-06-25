@@ -1,58 +1,74 @@
 import React, { useEffect, useState } from 'react'
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import Home from './components/Home'
 import Menu from './components/Menu';
 import Navbar from './components/Navbar'
 import '../src/App.css'
 import Checkout from './pages/Checkout';
+
+
+
 export default function App() {
   const [dishes, setDishes] = useState([
-    // {itemName:'Select an item',quantity:0}
   ]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [counter, setCounter] = useState(0);
   let updatePrice = 0;
-  const setOrder = (na) => {
-    // const newItem={
-    //   itemName:
-    // }
-    setDishes(arr => [...arr, na]);
+
+  const location = useLocation;
+  console.log(location)
+  const setOrder = (na, qty = 1, price) => {
+    const newItem = {
+      itemName: na,
+      quantity: qty,
+      itemPrice: price
+    }
+    setDishes(arr => [...arr, newItem]);
 
   }
 
   useEffect(() => {
-    console.log(dishes)
-    dishes.forEach(item => updatePrice += Number(item.slice(-5)));
+    // console.log(dishes)
+    dishes.forEach(item => updatePrice += (item.quantity * item.itemPrice))
+    // dishes.forEach(item => console.log(item))
     setTotalPrice(updatePrice);
     // console.log(totalPrice);
 
   }, [dishes])
 
 
-  //increase counter
-  const increase = () => {
-    setCounter(count => count + 1);
+
+    //increase counter
+    ;
+  const handleQuantityIncrease = (index) => {
+    const newItems = [...dishes];
+
+    newItems[index].quantity++;
+
+    setDishes(newItems);
+    // updatePrice += (newItems[index].quantity * newItems[index].itemPrice);
+    // setTotalPrice(updatePrice)
   };
 
-  //decrease counter
-  const decrease = () => {
-    if (counter > 0) {
-      setCounter(count => count - 1);
-    }
+  const handleQuantityDecrease = (index) => {
+    const newItems = [...dishes];
+
+    newItems[index].quantity--;
+
+    setDishes(newItems);
   };
 
-  //reset counter 
-  const reset = () => {
-    setCounter(0)
-  }
   return (
 
     <>
       <Router>
         <Navbar />
         <Routes>
-          <Route exact path='/' element={<Home setOrder={setOrder} dishes={dishes} totalPrice={totalPrice} counter={counter} increase={increase} decrease={decrease} reset={reset} />} />
-          <Route exact path='/checkout' element={<Checkout dishes={dishes} totalPrice={totalPrice} counter={counter} increase={increase} decrease={decrease} reset={reset} />} />
+          <Route exact path='/' element={<Home setOrder={setOrder} dishes={dishes} totalPrice={totalPrice} handleQuantityIncrease={handleQuantityIncrease}
+            handleQuantityDecrease={handleQuantityDecrease} />} />
+          <Route exact path='/checkout' element={<Checkout dishes={dishes} totalPrice={totalPrice}
+            handleQuantityIncrease={handleQuantityIncrease}
+            handleQuantityDecrease={handleQuantityDecrease}
+          />} />
           <Route exact path='/menu' element={<Menu />} />
         </Routes>
       </Router>

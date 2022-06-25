@@ -20,7 +20,10 @@ export default function Navbar
                                 <Link className="nav-link" to="/">Specialities</Link>
                             </li>
                             <li className="nav-item mx-3">
-                                <Link className="nav-link" to="/">Pricing</Link>
+                                <Link className="nav-link" to="/">Location</Link>
+                            </li>
+                            <li className="nav-item mx-3">
+                                <Link className="nav-link" to="/">Contact Us</Link>
                             </li>
                         </ul>
                     </div>
