@@ -52,7 +52,7 @@ const Myorder = (props) => {
                     <button className='btn mybtn bgcol'>
 
                         {<Link to='/checkout' className="nav-link d-flex align-items-center justify-content-center fs-5" >
-                            <span>Checkout</span><span class="material-symbols-outlined ms-2">
+                            <span>Checkout</span><span className="material-symbols-outlined ms-2">
                                 arrow_forward
                             </span></Link>}
                     </button>

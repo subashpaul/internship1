@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from './components/Home'
 import Menu from './components/Menu';
 import Navbar from './components/Navbar'
@@ -14,8 +14,6 @@ export default function App() {
   const [totalPrice, setTotalPrice] = useState(0);
   let updatePrice = 0;
 
-  const location = useLocation;
-  console.log(location)
   const setOrder = (na, qty = 1, price) => {
     const newItem = {
       itemName: na,

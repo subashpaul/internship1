@@ -69,7 +69,7 @@ const Checkout = (props) => {
                     <h1 className='text-center'>${Number(props.totalPrice).toFixed(2)}</h1>
                     <div className="d-grid gap-2">
                         <button className="btn btn-primary bgcol  mt-2 d-flex justify-content-center align-items-center" type="button">
-                            <span class="material-symbols-outlined me-3">
+                            <span className="material-symbols-outlined me-3">
                                 payments
                             </span><span className='fs-4'>Payments</span>
 
